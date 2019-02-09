@@ -19,13 +19,38 @@ const cockpit = props => {
     //     }, 1000);
     // }, [props.persons]); // runs only when props.persons change
 
+    // useEffect(() => {
+    //     console.log("[Cockpit.js] useEffect");
+
+    //     setTimeout(() => {
+    //         alert("simulate e.g. http request");
+    //     }, 1000);
+    // }, []); // runs only once, empty array means no dependencies, but prevents from running every time
+
+    // useEffect(() => {
+    //     console.log("[Cockpit.js] useEffect");
+
+    //     setTimeout(() => {
+    //         alert("simulate e.g. http request");
+    //     }, 1000);
+
+    //     return () => {
+    //         console.log("[Cockpit.js] cleanup work in useEffect hook");
+    //     };
+    // }, []);
+
     useEffect(() => {
         console.log("[Cockpit.js] useEffect");
 
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             alert("simulate e.g. http request");
         }, 1000);
-    }, []); // runs only once, empty array means no dependencies, but prevents from running every time
+
+        return () => {
+            clearTimeout(timer);
+            console.log("[Cockpit.js] cleanup work in useEffect hook");
+        };
+    }, []);
 
     const assignedClasses = [];
     let btnClass = "";
